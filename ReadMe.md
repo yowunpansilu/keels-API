@@ -91,10 +91,19 @@ All endpoints return standard JSON.
    ```bash
    docker-compose up -d --build
    ```
-3. Trigger the initial scrape:
+3. Trigger the initial scrape (requires API Key):
    ```bash
-   curl -X POST http://localhost:3000/api/scraper/run
+   curl -X POST http://localhost:3000/api/scraper/run -H "X-API-KEY: your_secure_api_key_here"
    ```
+
+## 🔒 Security
+The API includes several production-grade security measures:
+- **Helmet**: Adds secure HTTP headers to prevent common vulnerabilities.
+- **Rate Limiting**: Limits requests per IP. You can adjust this in the `.env` file:
+  - `RATE_LIMIT_WINDOW`: The window in milliseconds (default 900000 = 15 mins).
+  - `RATE_LIMIT_MAX`: The maximum number of requests (default 100).
+- **API Key Protection**: Sensitive operations like building the scraper's session or manual runs require the `X-API-KEY` header.
+- **CORS**: Configured to restrict cross-origin access (can be refined in `server.js`).
 
 ## 🔍 Tools
 - **API**: `http://localhost:3000`

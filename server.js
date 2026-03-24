@@ -2,14 +2,36 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const { RATE_LIMIT_WINDOW, RATE_LIMIT_MAX } = require('./config/constants');
 const Product = require('./models/Product');
 const PriceHistory = require('./models/PriceHistory');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Security Middleware
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+// Rate Limiting (Adjustable via .env or constants.js)
+const limiter = rateLimit({
+  windowMs: process.env.RATE_LIMIT_WINDOW ? parseInt(process.env.RATE_LIMIT_WINDOW) : RATE_LIMIT_WINDOW,
+  max: process.env.RATE_LIMIT_MAX ? parseInt(process.env.RATE_LIMIT_MAX) : RATE_LIMIT_MAX,
+  message: { error: 'Too many requests, please try again later.' }
+});
+app.use('/api/', limiter);
+
+// Simple API Key Middleware
+const apiKeyMiddleware = (req, res, next) => {
+  const apiKey = req.header('X-API-KEY');
+  if (process.env.API_KEY && apiKey !== process.env.API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized: Invalid or missing API Key' });
+  }
+  next();
+};
 
 // 1. Get all products with pagination and search
 app.get('/api/products', async (req, res) => {
@@ -95,8 +117,8 @@ app.get('/api/status', async (req, res) => {
   }
 });
 
-// 5. Manual trigger for scraper (optional, for dev)
-app.post('/api/scraper/run', async (req, res) => {
+// 5. Manual trigger for scraper (Protected)
+app.post('/api/scraper/run', apiKeyMiddleware, async (req, res) => {
   const scrapeAll = require('./scraper');
   res.json({ message: 'Scraper started in background' });
   scrapeAll().catch(console.error);

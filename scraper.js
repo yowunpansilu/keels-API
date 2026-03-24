@@ -6,17 +6,14 @@ const PriceHistory = require('./models/PriceHistory');
 
 puppeteer.use(StealthPlugin());
 
-const BASE_URL = 'https://www.keellssuper.com';
-const API_BASE = 'https://zebraliveback.keellssuper.com';
-
-const CATEGORIES = [
-  { name: 'Vegetables', id: 16, url: 'https://www.keellssuper.com/fresh-vegetables' },
-  { name: 'Fruits', id: 6, url: 'https://www.keellssuper.com/fresh-fruits' },
-  { name: 'Meat', id: 12, url: 'https://www.keellssuper.com/fresh-meat' },
-  { name: 'Seafood', id: 4, url: 'https://www.keellssuper.com/fresh-seafood' },
-  { name: 'Grocery', id: 7, url: 'https://www.keellssuper.com/grocery' },
-  { name: 'Household', id: 9, url: 'https://www.keellssuper.com/household' }
-];
+const { 
+  CATEGORIES, 
+  OUTLET_CODE, 
+  BASE_URL, 
+  API_BASE, 
+  DEFAULT_ITEMS_PER_PAGE, 
+  MAX_PAGES_PER_CATEGORY 
+} = require('./config/constants');
 
 async function scrapeAll() {
   let browser;
@@ -73,8 +70,8 @@ async function scrapeAll() {
       
       let pageNo = 1;
       let hasMore = true;
-      while (hasMore && pageNo <= 20) {
-        const apiUrl = `${API_BASE}/2.0/WebV2/GetItemDetails?pageNo=${pageNo}&itemsPerPage=60&outletCode=SCBI&departmentId=${cat.id}&itemPricefrom=0&itemPriceTo=200000&isFeatured=0&isPromotionOnly=false&sortBy=default&isShowOutofStockItems=true`;
+      while (hasMore && pageNo <= MAX_PAGES_PER_CATEGORY) {
+        const apiUrl = `${API_BASE}/2.0/WebV2/GetItemDetails?pageNo=${pageNo}&itemsPerPage=${DEFAULT_ITEMS_PER_PAGE}&outletCode=${OUTLET_CODE}&departmentId=${cat.id}&itemPricefrom=0&itemPriceTo=200000&isFeatured=0&isPromotionOnly=false&sortBy=default&isShowOutofStockItems=true`;
         
         console.log(`    API Page ${pageNo}...`);
         try {
