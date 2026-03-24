@@ -19,6 +19,7 @@ const productSchema = new mongoose.Schema({
   subDepartmentCode:     String,
   categoryCode:          String,
   departmentId:          Number,
+  departmentName:        String,
   lastUpdated:           { type: Date, default: Date.now },
 });
 

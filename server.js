@@ -23,6 +23,9 @@ app.get('/api/products', async (req, res) => {
     if (departmentId) {
       query.departmentId = departmentId;
     }
+    if (req.query.category) {
+      query.departmentName = { $regex: req.query.category, $options: 'i' };
+    }
 
     const products = await Product.find(query)
       .limit(limit * 1)
@@ -64,7 +67,35 @@ app.get('/api/products/:sku/history', async (req, res) => {
   }
 });
 
-// 4. Manual trigger for scraper (optional, for dev)
+// 4. Status API - See how many items are scraped
+app.get('/api/status', async (req, res) => {
+  try {
+    const totalProducts = await Product.countDocuments();
+    const totalHistory = await PriceHistory.countDocuments();
+    const latestProduct = await Product.findOne().sort({ lastUpdated: -1 });
+    
+    // Group by department to see progress
+    const byDept = await Product.aggregate([
+      { $group: { 
+        _id: '$departmentName', 
+        id: { $first: '$departmentId' },
+        count: { $sum: 1 } 
+      } }
+    ]);
+
+    res.json({
+      status: 'success',
+      totalProducts,
+      totalHistory,
+      lastUpdate: latestProduct ? latestProduct.lastUpdated : null,
+      byDepartment: byDept
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// 5. Manual trigger for scraper (optional, for dev)
 app.post('/api/scraper/run', async (req, res) => {
   const scrapeAll = require('./scraper');
   res.json({ message: 'Scraper started in background' });
