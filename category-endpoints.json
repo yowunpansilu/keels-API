@@ -1,0 +1,71 @@
+[
+  {
+    "slug": "/fresh-vegetables",
+    "captured": [
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Common/GetSystemConfiguration",
+        "status": 200,
+        "size": 2161,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL349\"}],\"result\":{\"deliveryOrderCashCheckout\":false,\"deliveryOrderCardCheckout\":true,\"orderDeliveryCharge\":390.00,\"pickupOrderCashCheckout\":false,\"pickupOrderCardCheckout\":true,\"pickupOrderDateLimit\":2,\"pickupOrderTimeLimit\":3,\"pickupOrderMinTime\":10,\"pickupOrderMaxTime\":20,\"pickupOrderTimeInterval\":1,\"concurrentSessionLimit\":2500,\"cardPaymentTestPhoneNumbers\":\"\",\"cardPaymentTestCardNumbers\":\"\",\""
+      },
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Login/GuestLogin",
+        "status": 200,
+        "size": 842,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Customer login success\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL122\"}],\"result\":{\"customerID\":86215,\"mobileNumber\":\"\",\"mobileNumberVerified\":false,\"title\":\"\",\"firstName\":\"Guest\",\"lastName\":\"\",\"customerName\":\" Guest \",\"email\":\"guest@keellsonline.com\",\"userSessionID\":\"4173585b-61c3-4574-b0ce-c63de999bd6d\",\"isNexus\":false,\"migrationVerified\":true,\"isTemporaryCartExist\":false,\"preferredOutlet\":\"SCDR\",\"preferredOutletDescription\":\"Darley Roa"
+      },
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Notification/GetInsideNotificationStripe",
+        "status": 200,
+        "size": 385,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Notification fetched successfully\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL185\"}],\"result\":{\"message\":\"Due to the recent increase in fuel prices, our delivery charge has been revised to Rs 390. We appreciate your understanding and continued support.\",\"cssClass\":\"error\",\"welcomeSystemConfiguration\":{\"showGuestLogin\":false}}}"
+      }
+    ]
+  },
+  {
+    "slug": "/fresh-fruits",
+    "captured": [
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Common/GetSystemConfiguration",
+        "status": 200,
+        "size": 2161,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL349\"}],\"result\":{\"deliveryOrderCashCheckout\":false,\"deliveryOrderCardCheckout\":true,\"orderDeliveryCharge\":390.00,\"pickupOrderCashCheckout\":false,\"pickupOrderCardCheckout\":true,\"pickupOrderDateLimit\":2,\"pickupOrderTimeLimit\":3,\"pickupOrderMinTime\":10,\"pickupOrderMaxTime\":20,\"pickupOrderTimeInterval\":1,\"concurrentSessionLimit\":2500,\"cardPaymentTestPhoneNumbers\":\"\",\"cardPaymentTestCardNumbers\":\"\",\""
+      },
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Login/GuestLogin",
+        "status": 200,
+        "size": 842,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Customer login success\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL122\"}],\"result\":{\"customerID\":86215,\"mobileNumber\":\"\",\"mobileNumberVerified\":false,\"title\":\"\",\"firstName\":\"Guest\",\"lastName\":\"\",\"customerName\":\" Guest \",\"email\":\"guest@keellsonline.com\",\"userSessionID\":\"0bbc4661-f49d-49a0-9792-1d3ba1c13272\",\"isNexus\":false,\"migrationVerified\":true,\"isTemporaryCartExist\":false,\"preferredOutlet\":\"SCDR\",\"preferredOutletDescription\":\"Darley Roa"
+      },
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Notification/GetInsideNotificationStripe",
+        "status": 200,
+        "size": 385,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Notification fetched successfully\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL185\"}],\"result\":{\"message\":\"Due to the recent increase in fuel prices, our delivery charge has been revised to Rs 390. We appreciate your understanding and continued support.\",\"cssClass\":\"error\",\"welcomeSystemConfiguration\":{\"showGuestLogin\":false}}}"
+      }
+    ]
+  },
+  {
+    "slug": "/bakery",
+    "captured": [
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Common/GetSystemConfiguration",
+        "status": 200,
+        "size": 2161,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL349\"}],\"result\":{\"deliveryOrderCashCheckout\":false,\"deliveryOrderCardCheckout\":true,\"orderDeliveryCharge\":390.00,\"pickupOrderCashCheckout\":false,\"pickupOrderCardCheckout\":true,\"pickupOrderDateLimit\":2,\"pickupOrderTimeLimit\":3,\"pickupOrderMinTime\":10,\"pickupOrderMaxTime\":20,\"pickupOrderTimeInterval\":1,\"concurrentSessionLimit\":2500,\"cardPaymentTestPhoneNumbers\":\"\",\"cardPaymentTestCardNumbers\":\"\",\""
+      },
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Login/GuestLogin",
+        "status": 200,
+        "size": 842,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Customer login success\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL122\"}],\"result\":{\"customerID\":86215,\"mobileNumber\":\"\",\"mobileNumberVerified\":false,\"title\":\"\",\"firstName\":\"Guest\",\"lastName\":\"\",\"customerName\":\" Guest \",\"email\":\"guest@keellsonline.com\",\"userSessionID\":\"89c26238-8aa3-4191-a504-191baa6fa1f6\",\"isNexus\":false,\"migrationVerified\":true,\"isTemporaryCartExist\":false,\"preferredOutlet\":\"SCDR\",\"preferredOutletDescription\":\"Darley Roa"
+      },
+      {
+        "url": "https://zebraliveback.keellssuper.com/1.0/Notification/GetInsideNotificationStripe",
+        "status": 200,
+        "size": 385,
+        "preview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Notification fetched successfully\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL185\"}],\"result\":{\"message\":\"Due to the recent increase in fuel prices, our delivery charge has been revised to Rs 390. We appreciate your understanding and continued support.\",\"cssClass\":\"error\",\"welcomeSystemConfiguration\":{\"showGuestLogin\":false}}}"
+      }
+    ]
+  }
+]

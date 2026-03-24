@@ -1,0 +1,521 @@
+{
+  "departmentList": {
+    "count": 12,
+    "sampleKeys": [
+      "departmentID",
+      "departmentCode",
+      "departmentName",
+      "pageheaderImageURL",
+      "pageheaderMobileImageURL",
+      "pageHeaderOnClickURL",
+      "checkAge",
+      "title",
+      "description",
+      "url"
+    ],
+    "sample": {
+      "departmentID": 16,
+      "departmentCode": "V",
+      "departmentName": "Vegetables",
+      "pageheaderImageURL": "",
+      "pageheaderMobileImageURL": "",
+      "pageHeaderOnClickURL": "",
+      "checkAge": false,
+      "title": "Keells Vegetables | Fresh Vegetables for the Best Prices",
+      "description": "Discover the Fresh Vegetables at Keells Online, where Quality meets Affordability. Stay updated on Vegetable Prices today and enjoy the Best Farm-fresh deals!",
+      "url": "fresh-vegetables"
+    }
+  },
+  "subDepartmentList": {
+    "count": 87,
+    "sampleKeys": [
+      "subDepartmentID",
+      "subDepartmentCode",
+      "subDepartmentName",
+      "departmentID",
+      "checkAge",
+      "title",
+      "description",
+      "url"
+    ],
+    "sample": {
+      "subDepartmentID": 18,
+      "subDepartmentCode": "CDE",
+      "subDepartmentName": "Desserts",
+      "departmentID": 3,
+      "checkAge": false,
+      "title": "Keells Desserts | Satisfy Your Sweet Tooth at Keells Online",
+      "description": "Indulge in Keells Desserts – Buy Curd, Chilled Cakes, Chilled Jaggery, and Chilled Puddings from a wide range. Elevate your sweet moments from Keells Online.",
+      "url": "chilled-desserts"
+    }
+  },
+  "dealsProductsList": {
+    "count": 10,
+    "sampleKeys": [
+      "orderId",
+      "itemID",
+      "itemCode",
+      "name",
+      "longDescription",
+      "amount",
+      "imageUrl",
+      "isFeatured",
+      "minQty",
+      "maxQty",
+      "slabQty",
+      "stockInHand",
+      "averageSale",
+      "uom",
+      "isPromotionApplied",
+      "promotionDiscountValue",
+      "discountValue",
+      "promoItemIDs",
+      "discountedTotal",
+      "isAvailable",
+      "quantity",
+      "otherPromotionTypeID",
+      "enlargeImageUrl",
+      "isSponsored",
+      "checkAge",
+      "departmentCode",
+      "subDepartmentCode",
+      "categoryCode",
+      "styleBorderColor",
+      "styleImageURL",
+      "isSellingToday",
+      "merchantID",
+      "hasMoreDeals"
+    ],
+    "sample": {
+      "orderId": 0,
+      "itemID": 46460,
+      "itemCode": "5125",
+      "name": "Milo Malted Food Drink Packet 400g",
+      "longDescription": "MILO MALTED FOOD DRINK PACKET 400G",
+      "amount": 890,
+      "imageUrl": "https://essstr.blob.core.windows.net/essimg/350x/Small/Pic5125.jpg",
+      "isFeatured": false,
+      "minQty": 1,
+      "maxQty": 99,
+      "slabQty": 1,
+      "stockInHand": 11,
+      "averageSale": 9,
+      "uom": "NO",
+      "isPromotionApplied": true,
+      "promotionDiscountValue": 133.5,
+      "discountValue": 0,
+      "promoItemIDs": null,
+      "discountedTotal": 0,
+      "isAvailable": true,
+      "quantity": 0,
+      "otherPromotionTypeID": 1,
+      "enlargeImageUrl": "",
+      "isSponsored": false,
+      "checkAge": false,
+      "departmentCode": "B",
+      "subDepartmentCode": "B0F",
+      "categoryCode": "B0FQV",
+      "styleBorderColor": "",
+      "styleImageURL": "",
+      "isSellingToday": true,
+      "merchantID": 1,
+      "hasMoreDeals": 0
+    }
+  },
+  "bestSellersList": {
+    "count": 10,
+    "sampleKeys": [
+      "orderId",
+      "itemID",
+      "itemCode",
+      "name",
+      "longDescription",
+      "amount",
+      "imageUrl",
+      "enlargeImageUrl",
+      "isFeatured",
+      "isSponsored",
+      "minQty",
+      "maxQty",
+      "slabQty",
+      "stockInHand",
+      "averageSale",
+      "uom",
+      "isPromotionApplied",
+      "promotionDiscountValue",
+      "discountValue",
+      "promoDetailIDs",
+      "discountedTotal",
+      "isAvailable",
+      "quantity",
+      "checkAge",
+      "departmentCode",
+      "subDepartmentCode",
+      "categoryCode",
+      "styleBorderColor",
+      "styleImageURL",
+      "isSellingToday",
+      "isUpdateQuantity",
+      "merchantID",
+      "hasMoreDeals",
+      "detailDescription",
+      "clickTrackingURL"
+    ],
+    "sample": {
+      "orderId": 0,
+      "itemID": 46460,
+      "itemCode": "5125",
+      "name": "Milo Malted Food Drink Packet 400g",
+      "longDescription": "MILO MALTED FOOD DRINK PACKET 400G",
+      "amount": 890,
+      "imageUrl": "https://essstr.blob.core.windows.net/essimg/350x/Small/Pic5125.jpg",
+      "enlargeImageUrl": "",
+      "isFeatured": false,
+      "isSponsored": false,
+      "minQty": 1,
+      "maxQty": 99,
+      "slabQty": 1,
+      "stockInHand": 11,
+      "averageSale": 9,
+      "uom": "NO",
+      "isPromotionApplied": true,
+      "promotionDiscountValue": 133.5,
+      "discountValue": 0,
+      "promoDetailIDs": null,
+      "discountedTotal": 0,
+      "isAvailable": true,
+      "quantity": 0,
+      "checkAge": false,
+      "departmentCode": "B",
+      "subDepartmentCode": "B0F",
+      "categoryCode": "B0FQV",
+      "styleBorderColor": "",
+      "styleImageURL": "",
+      "isSellingToday": true,
+      "isUpdateQuantity": false,
+      "merchantID": 1,
+      "hasMoreDeals": 0,
+      "detailDescription": null,
+      "clickTrackingURL": null
+    }
+  },
+  "featuredProductsList": {
+    "count": 0,
+    "sampleKeys": [],
+    "sample": null
+  },
+  "itemDetailsList": {
+    "type": "object",
+    "value": null
+  },
+  "promotionItemDetailsList": {
+    "count": 10,
+    "sampleKeys": [
+      "promotionDetailID",
+      "promotionHeaderID",
+      "promotionTypeID",
+      "promotionSubTypeID",
+      "isNexusDeal",
+      "locationCode",
+      "minimumQuantity",
+      "maximumQuantity",
+      "itemID",
+      "discountValue",
+      "isValuePromotion",
+      "discountPercentage",
+      "isPercentagePromotion",
+      "otherPromotionTypeID",
+      "alreadyObtainedByCustomer",
+      "promoCode",
+      "promoDescription",
+      "checkPaymentMode"
+    ],
+    "sample": {
+      "promotionDetailID": 8716436,
+      "promotionHeaderID": 34468,
+      "promotionTypeID": 2,
+      "promotionSubTypeID": 0,
+      "isNexusDeal": false,
+      "locationCode": "ALL",
+      "minimumQuantity": 0,
+      "maximumQuantity": 5,
+      "itemID": 46460,
+      "discountValue": 0,
+      "isValuePromotion": false,
+      "discountPercentage": 15,
+      "isPercentagePromotion": true,
+      "otherPromotionTypeID": 1,
+      "alreadyObtainedByCustomer": false,
+      "promoCode": null,
+      "promoDescription": null,
+      "checkPaymentMode": false
+    }
+  },
+  "bannerList": {
+    "count": 10,
+    "sampleKeys": [
+      "bannerID",
+      "bannerTypeID",
+      "webImageURL",
+      "mobileImageURL",
+      "buttonLink",
+      "displayOrder",
+      "isActive",
+      "isExternalLink",
+      "webLinkExternal",
+      "pdfURL"
+    ],
+    "sample": {
+      "bannerID": 53,
+      "bannerTypeID": 1,
+      "webImageURL": "https://essstr.blob.core.windows.net/uiimg/Carousel/FreshVegetables/FreshVegetablesWebBanner.png",
+      "mobileImageURL": "https://essstr.blob.core.windows.net/uiimg/Carousel/FreshVegetables/FreshVegetablesMobileBanner.png",
+      "buttonLink": "/product?cat=1&s=16&ost=&utm_source=browser&utm_medium=banner&utm_campaign=fresh_produce&utm_term=01",
+      "displayOrder": 79,
+      "isActive": true,
+      "isExternalLink": false,
+      "webLinkExternal": "",
+      "pdfURL": null
+    }
+  },
+  "tileList": {
+    "count": 6,
+    "sampleKeys": [
+      "tileID",
+      "tileTypeID",
+      "webImageURL",
+      "mobileImageURL",
+      "buttonText",
+      "buttonLink",
+      "isActive"
+    ],
+    "sample": {
+      "tileID": 2,
+      "tileTypeID": 1,
+      "webImageURL": "https://essstr.blob.core.windows.net/uiimg/ShopByCategory/ShopByCategory1.jpg",
+      "mobileImageURL": "https://essstr.blob.core.windows.net/uiimg/ShopByCategory/ShopByCategory_M1.jpg",
+      "buttonText": "",
+      "buttonLink": "snacks",
+      "isActive": true
+    }
+  },
+  "utilityPaymentCategories": {
+    "type": "object",
+    "value": null
+  },
+  "utilityPaymentModes": {
+    "type": "object",
+    "value": null
+  },
+  "utilityPaymentModeDetails": {
+    "type": "object",
+    "value": null
+  },
+  "utilityPaymentModeCommisions": {
+    "type": "object",
+    "value": null
+  },
+  "suggestedItemsList": {
+    "count": 6734,
+    "sampleKeys": [
+      "itemID",
+      "itemName"
+    ],
+    "sample": {
+      "itemID": 78247,
+      "itemName": "Myco Farm Abalone Mushroom 200g"
+    }
+  },
+  "systemConfiguration": {
+    "type": "object",
+    "value": {
+      "deliveryOrderCashCheckout": false,
+      "deliveryOrderCardCheckout": true,
+      "orderDeliveryCharge": 0,
+      "pickupOrderCashCheckout": false,
+      "pickupOrderCardCheckout": true,
+      "pickupOrderDateLimit": 2,
+      "pickupOrderTimeLimit": 3,
+      "pickupOrderMinTime": 10,
+      "pickupOrderMaxTime": 20,
+      "pickupOrderTimeInterval": 1,
+      "concurrentSessionLimit": 2500,
+      "cardPaymentTestPhoneNumbers": "",
+      "cardPaymentTestCardNumbers": "",
+      "sessionTimeOutInterval": 30,
+      "temporySaveItemCountFrequency": 3,
+      "temporySaveItemEnabled": true,
+      "oAuth2TokenLifeTime": 20,
+      "oAuth2CookieLifeTime": 1,
+      "legalAgeLimit": 21,
+      "deliveryOrderDateLimit": 2,
+      "showHeavyLoadMessage": false,
+      "allowNexusRedemption": true,
+      "isEmojotEnabled": true,
+      "isSiteOffline": false,
+      "deliveryOrderDateStartFromDayCount": 0,
+      "ageConsentMessage": "By entering this page, you confirm that you are of legal age to buy liquor and tobacco and you will abide by the regulations at both the purchase and delivery point.",
+      "isPreAuthEnabled": true,
+      "isQueueEnable": false,
+      "queueURL": "",
+      "isProductDetailEnabled": true,
+      "isForeignCurrencyEnabled": true,
+      "asapDeliveryText": "Test",
+      "isAzureSearchEnable": false,
+      "priorityNumbers": "0714344033",
+      "isCheckoutMessage": false,
+      "checkoutMessage": "Due to the Fuel shortage, there will be delays in order deliveries. We are working with our delivery partners to deliver your orders at the earliest. Our store pick up option remains active. We regret any inconvenience caused.",
+      "isShowWelcomePage": false,
+      "expressDeliveryMaxiItemVeraity": 10,
+      "expressDeliveryMaxUnitQuanty": 3,
+      "expressDeliveryMaxUnitsOfMass": 3,
+      "cashOnDeliveryMaxTotal": 0,
+      "expressDeliveryCharge": 250,
+      "isPromoCodeEnabled": true,
+      "isExpressDeliveryActive": false,
+      "acceptableTrueLocationDistance": 100,
+      "isNexusTransactionEnabled": false,
+      "isPolytheneBagChargesApplied": true,
+      "polytheneBagMessage": "As per government regulations, a charge is added for the polythene bags used in your order. A temporary bag charge has been included in your bill and will be adjusted and refunded based on the actual number of bags used during packing. Note: Medium bags – Rs. 3 | Large bags – Rs. 5"
+    }
+  },
+  "deliveryCityList": {
+    "type": "object",
+    "value": null
+  },
+  "deliverySuburbsList": {
+    "type": "object",
+    "value": null
+  },
+  "outletDetails": {
+    "type": "object",
+    "value": null
+  },
+  "paymentMethodsList": {
+    "count": 2,
+    "sampleKeys": [
+      "id",
+      "name",
+      "url"
+    ],
+    "sample": {
+      "id": 1,
+      "name": "Visa/Master",
+      "url": "https://essstr.blob.core.windows.net/uiimg/PaymentMethods/visa.svg"
+    }
+  },
+  "refundOptionsList": {
+    "count": 2,
+    "sampleKeys": [
+      "refundOptionID",
+      "refundOptionName"
+    ],
+    "sample": {
+      "refundOptionID": 2,
+      "refundOptionName": "By Cash (Immediate)"
+    }
+  },
+  "promotionCategoryList": {
+    "count": 2,
+    "sampleKeys": [
+      "categoryID",
+      "category"
+    ],
+    "sample": {
+      "categoryID": 1,
+      "category": "Keells Deals"
+    }
+  },
+  "cartItems": {
+    "type": "object",
+    "value": null
+  },
+  "lastOrderPreference": {
+    "type": "object",
+    "value": null
+  },
+  "brandList": {
+    "type": "object",
+    "value": null
+  },
+  "categoryList": {
+    "count": 322,
+    "sampleKeys": [
+      "categoryID",
+      "departmentID",
+      "subDepartmentID",
+      "categoryCode",
+      "categoryName"
+    ],
+    "sample": {
+      "categoryID": 743,
+      "departmentID": 7,
+      "subDepartmentID": 242,
+      "categoryCode": "GW25B",
+      "categoryName": "Buns"
+    }
+  },
+  "pickupTimeSlotList": {
+    "type": "object",
+    "value": null
+  },
+  "cartTemplateList": {
+    "type": "object",
+    "value": null
+  },
+  "pastOrdersList": {
+    "type": "object",
+    "value": null
+  },
+  "campaign": {
+    "type": "object",
+    "value": null
+  },
+  "campaignBannerList": {
+    "type": "object",
+    "value": null
+  },
+  "campaignGroupList": {
+    "type": "object",
+    "value": null
+  },
+  "productListHeader": {
+    "type": "object",
+    "value": null
+  },
+  "userCurrencyDetail": {
+    "type": "object",
+    "value": null
+  },
+  "fullfilmentMessageURL": {
+    "type": "string",
+    "value": ""
+  },
+  "mainOutletCode": {
+    "type": "string",
+    "value": ""
+  },
+  "kmBaseDeliverFee": {
+    "type": "number",
+    "value": 0
+  },
+  "isExpressDeliveryActive": {
+    "type": "boolean",
+    "value": false
+  },
+  "polytheneChargeList": {
+    "count": 5,
+    "sampleKeys": [
+      "id",
+      "minimumValue",
+      "maximumValue",
+      "amount"
+    ],
+    "sample": {
+      "id": 1,
+      "minimumValue": 0,
+      "maximumValue": 7500.99,
+      "amount": 60
+    }
+  }
+}

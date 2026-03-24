@@ -1,0 +1,65 @@
+[
+  {
+    "url": "https://zebraliveback.keellssuper.com/1.0/Common/GetSystemConfiguration",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyPreview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL349\"}],\"result\":{\"deliveryOrderCashCheckout\":false,\"deliveryOrderCardCheckout\":true,\"orderDeliveryCharge\":390.00,\"pickupOrderCashCheckout\":false,\"pickupOrderCardCheckout\":true,\"pickupOrderDateLimit\":2,\"pickupOrderTimeLimit\":3,\"pickupOrderMinTime\":10,\"pickupOrderMaxTime\":20,\"pickupOrderTimeInterval\":1,\"concurrentSessionLimit\":2500,\"cardPaymentTestPhoneNumbers\":\"\",\"cardPaymentTestCardNumbers\":\"\",\"",
+    "bodyLength": 2161
+  },
+  {
+    "url": "https://zebraliveback.keellssuper.com/1.0/Login/GuestLogin",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyPreview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Customer login success\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL122\"}],\"result\":{\"customerID\":86215,\"mobileNumber\":\"\",\"mobileNumberVerified\":false,\"title\":\"\",\"firstName\":\"Guest\",\"lastName\":\"\",\"customerName\":\" Guest \",\"email\":\"guest@keellsonline.com\",\"userSessionID\":\"79420a1c-e93c-4e61-b1b0-ab4bda68ae58\",\"isNexus\":false,\"migrationVerified\":true,\"isTemporaryCartExist\":false,\"preferredOutlet\":\"SCDR\",\"preferredOutletDescription\":\"Darley Roa",
+    "bodyLength": 842
+  },
+  {
+    "url": "https://zebraliveback.keellssuper.com/1.0/Notification/GetInsideNotificationStripe",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyPreview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Notification fetched successfully\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL185\"}],\"result\":{\"message\":\"Due to the recent increase in fuel prices, our delivery charge has been revised to Rs 390. We appreciate your understanding and continued support.\",\"cssClass\":\"error\",\"welcomeSystemConfiguration\":{\"showGuestLogin\":false}}}",
+    "bodyLength": 385
+  },
+  {
+    "url": "https://www.googleadservices.com/pagead/conversion/985154737/?random=1774337790895&cv=11&fst=1774337790895&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be63k1v9168793429z8831968741za20gzb831968741zd831968741xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115938466~115938469~116024733~117484252~118104772&u_w=800&u_h=600&url=https%3A%2F%2Fwww.keellssuper.com%2F&ref=https%3A%2F%2Fwww.keellssuper.com%2F&label=Naf8CLqv1qUZELGJ4dUD&capi=1&frm=0&bttype=purchase&value=0&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=826736470.1774337786&uaa=&uab=&uafvl=&uamb=0&uam=&uap=&uapv=&uaw=0&ec_mode=a&_tu=CA&gcl_ctr=1~0~0&category=acrcp_v1_512&em=tv.1&fmt=7",
+    "status": 200,
+    "contentType": "application/json; charset=UTF-8",
+    "bodyPreview": "event: message\ndata: {\"fetch\":[\"https://googleads.g.doubleclick.net/pagead/viewthroughconversion/985154737/?random=2012738409&cv=11&fst=1774337790895&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be63k1v9168793429z8831968741za20gzb831968741zd831968741xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115938466~115938469~116024733~117484252~118104772&u_w=800&u_h=600&url=https%3A%2F%2Fwww.keellssuper.com%2F&ref=https%3A%2F%2Fwww.keellssuper.com%2F&label=Naf8CLqv1qUZELGJ4dUD&capi=1&frm=0&value=",
+    "bodyLength": 3114
+  },
+  {
+    "url": "https://zebraliveback.keellssuper.com/1.0/Web/GetInitialDataCollection?locationCode=SCDR&shippingDetailsId=0",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyPreview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Get item order data collection success\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL52\"}],\"result\":{\"departmentList\":[{\"departmentID\":16,\"departmentCode\":\"V\",\"departmentName\":\"Vegetables\",\"pageheaderImageURL\":\"\",\"pageheaderMobileImageURL\":\"\",\"pageHeaderOnClickURL\":\"\",\"checkAge\":false,\"title\":\"Keells Vegetables | Fresh Vegetables for the Best Prices\",\"description\":\"Discover the Fresh Vegetables at Keells Online, where Quality meets Affordabi",
+    "bodyLength": 510853
+  },
+  {
+    "url": "https://www.googleadservices.com/pagead/conversion/985154737/?random=1774337801112&cv=11&fst=1774337801112&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be63k1v9168793429z8831968741za20gzb831968741zd831968741xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115616985~115938466~115938469~116024733~117484252&u_w=800&u_h=600&url=https%3A%2F%2Fwww.keellssuper.com%2Fcategory&label=Naf8CLqv1qUZELGJ4dUD&capi=1&frm=0&bttype=purchase&value=0&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=826736470.1774337786&uaa=&uab=&uafvl=&uamb=0&uam=&uap=&uapv=&uaw=0&ec_mode=a&_tu=CA&gcl_ctr=2~0~0&category=acrcp_v1_512&em=tv.1&fmt=7",
+    "status": 200,
+    "contentType": "application/json; charset=UTF-8",
+    "bodyPreview": "event: message\ndata: {\"fetch\":[\"https://googleads.g.doubleclick.net/pagead/viewthroughconversion/985154737/?random=180938692&cv=11&fst=1774337801112&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be63k1v9168793429z8831968741za20gzb831968741zd831968741xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115616985~115938466~115938469~116024733~117484252&u_w=800&u_h=600&url=https%3A%2F%2Fwww.keellssuper.com%2Fcategory&label=Naf8CLqv1qUZELGJ4dUD&capi=1&frm=0&value=0&hn=www.googleadservices.com&npa=",
+    "bodyLength": 3082
+  },
+  {
+    "url": "https://zebraliveback.keellssuper.com/1.0/Web/GetInitialDataCollection?locationCode=SCDR&shippingDetailsId=0",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyPreview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Get item order data collection success\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL52\"}],\"result\":{\"departmentList\":[{\"departmentID\":16,\"departmentCode\":\"V\",\"departmentName\":\"Vegetables\",\"pageheaderImageURL\":\"\",\"pageheaderMobileImageURL\":\"\",\"pageHeaderOnClickURL\":\"\",\"checkAge\":false,\"title\":\"Keells Vegetables | Fresh Vegetables for the Best Prices\",\"description\":\"Discover the Fresh Vegetables at Keells Online, where Quality meets Affordabi",
+    "bodyLength": 510853
+  },
+  {
+    "url": "https://www.googleadservices.com/pagead/conversion/985154737/?random=1774337809053&cv=11&fst=1774337809053&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be63k1v9168793429z8831968741za20gzb831968741zd831968741xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115616986~115938465~115938469~116024733~117484252&u_w=800&u_h=600&url=https%3A%2F%2Fwww.keellssuper.com%2Fsearch%3Fq%3Dmilk&label=Naf8CLqv1qUZELGJ4dUD&capi=1&frm=0&bttype=purchase&value=0&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=826736470.1774337786&uaa=&uab=&uafvl=&uamb=0&uam=&uap=&uapv=&uaw=0&ec_mode=a&_tu=CA&gcl_ctr=3~0~0&category=acrcp_v1_512&em=tv.1&fmt=7",
+    "status": 200,
+    "contentType": "application/json; charset=UTF-8",
+    "bodyPreview": "event: message\ndata: {\"fetch\":[\"https://googleads.g.doubleclick.net/pagead/viewthroughconversion/985154737/?random=69405224&cv=11&fst=1774337809053&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be63k1v9168793429z8831968741za20gzb831968741zd831968741xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115616986~115938465~115938469~116024733~117484252&u_w=800&u_h=600&url=https%3A%2F%2Fwww.keellssuper.com%2Fsearch%3Fq%3Dmilk&label=Naf8CLqv1qUZELGJ4dUD&capi=1&frm=0&value=0&hn=www.googleadservices.",
+    "bodyLength": 3050
+  },
+  {
+    "url": "https://zebraliveback.keellssuper.com/1.0/Web/GetInitialDataCollection?locationCode=SCDR&shippingDetailsId=0",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyPreview": "{\"statusCode\":200,\"errorList\":[{\"statusMessage\":\"Get item order data collection success\",\"errorType\":4,\"errorMessage\":\"\",\"resourceCode\":\"KOL52\"}],\"result\":{\"departmentList\":[{\"departmentID\":16,\"departmentCode\":\"V\",\"departmentName\":\"Vegetables\",\"pageheaderImageURL\":\"\",\"pageheaderMobileImageURL\":\"\",\"pageHeaderOnClickURL\":\"\",\"checkAge\":false,\"title\":\"Keells Vegetables | Fresh Vegetables for the Best Prices\",\"description\":\"Discover the Fresh Vegetables at Keells Online, where Quality meets Affordabi",
+    "bodyLength": 510853
+  }
+]
