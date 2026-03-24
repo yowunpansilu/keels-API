@@ -37,7 +37,7 @@ const apiKeyMiddleware = (req, res, next) => {
 app.get('/api/products', async (req, res) => {
   try {
     const { page = 1, limit = 20, search = '', departmentId } = req.query;
-    
+
     const query = {};
     if (search) {
       query.name = { $regex: search, $options: 'i' };
@@ -95,14 +95,16 @@ app.get('/api/status', async (req, res) => {
     const totalProducts = await Product.countDocuments();
     const totalHistory = await PriceHistory.countDocuments();
     const latestProduct = await Product.findOne().sort({ lastUpdated: -1 });
-    
+
     // Group by department to see progress
     const byDept = await Product.aggregate([
-      { $group: { 
-        _id: '$departmentName', 
-        id: { $first: '$departmentId' },
-        count: { $sum: 1 } 
-      } }
+      {
+        $group: {
+          _id: '$departmentName',
+          id: { $first: '$departmentId' },
+          count: { $sum: 1 }
+        }
+      }
     ]);
 
     res.json({
