@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: keells-price-api
+    runtime: docker
+    plan: free # Use the free plan
+    envVars:
+      - key: MONGODB_URI
+        sync: false # User must set this in the Render dashboard
+      - key: API_KEY
+        sync: false # User must set this for security
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /api/status

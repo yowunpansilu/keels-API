@@ -9,7 +9,7 @@
 
 ## 2. Infrastructure & Hosting
 - **Database**: **MongoDB Atlas (M0 Free Tier)**. Offers 512MB storage which is sufficient for a large catalog and historical tracking.
-- **API Hosting**: **Render.com** (Free Web Service) or **Fly.io**. Both natively support deploying Docker containers.
+- **API Hosting**: **Render.com** (Free Web Service)
 - **Scraping Automation**: **GitHub Actions**. We can set up a scheduled Cron job (running once daily) to execute the Puppeteer scraper and push updates directly to MongoDB Atlas. GitHub Actions provides plenty of free execution time for a daily scraping job.
 
 ## 3. Database Schema Design (MongoDB)
@@ -31,28 +31,28 @@ Since Keells' HTML DOM is heavily guarded or obfuscated (making standard CSS sel
 ## 5. Step-by-Step Implementation
 
 ### Phase 1: Local Setup & Scraper Development
-- [ ] Initialize Node.js project.
-- [ ] Install `puppeteer`, `puppeteer-extra`, `puppeteer-extra-plugin-stealth`, `mongoose`, `dotenv`.
-- [ ] Develop the Network Interception scraper:
-  - Implement request jitter/delays and user-agent rotation.
-  - Listen for the background XHR/Fetch API responses that Keells uses to load products.
-  - Save the intercepted JSON product data directly.
-- [ ] Implement database upsert logic (Update `Product`, conditionally append to `PriceHistory`).
+- [x] Initialize Node.js project.
+- [x] Install `puppeteer`, `puppeteer-extra`, `puppeteer-extra-plugin-stealth`, `mongoose`, `dotenv`.
+- [x] Develop the Network Interception scraper:
+  - [x] Implement request jitter/delays and user-agent rotation.
+  - [x] Listen for the background XHR/Fetch API responses that Keells uses to load products.
+  - [x] Save the intercepted JSON product data directly.
+- [x] Implement database upsert logic (Update `Product`, conditionally append to `PriceHistory`).
 
 ### Phase 2: API Development
-- [ ] Install `express`, `cors`.
-- [ ] Define Mongoose models (`Product`, `PriceHistory`).
-- [ ] Build REST Endpoints:
-  - `GET /api/products` (List products, with search/pagination).
-  - `GET /api/products/category/:category` (Filter by category).
-  - `GET /api/products/:sku/history` (Get price history).
+- [x] Install `express`, `cors`.
+- [x] Define Mongoose models (`Product`, `PriceHistory`).
+- [x] Build REST Endpoints:
+  - [x] `GET /api/products` (List products, with search/pagination).
+  - [x] `GET /api/products/category/:category` (Filter by category).
+  - [x] `GET /api/products/:sku/history` (Get price history).
 
 ### Phase 3: Dockerization (Local Testing)
-- [ ] Create a `Dockerfile` for the Node.js API.
-- [ ] Create a `docker-compose.yml` to spin up both the API and a local `mongo` database container.
-- [ ] Test the full stack locally (`docker-compose up`).
+- [x] Create a `Dockerfile` for the Node.js API.
+- [x] Create a `docker-compose.yml` to spin up both the API and a local `mongo` database container.
+- [x] Test the full stack locally (`docker-compose up`).
 
 ### Phase 4: Production Deployment
-- [ ] Provision MongoDB Atlas cluster and acquire connection URI.
-- [ ] Deploy Dockerized API to Render.com.
-- [ ] Configure GitHub Actions workflow (`.github/workflows/scrape.yml`) to run the scraper daily.
+- [/] Provision MongoDB Atlas cluster and acquire connection URI.
+- [/] Deploy Dockerized API to Render.com.
+- [x] Configure GitHub Actions workflow (`.github/workflows/scrape.yml`) to run the scraper daily.

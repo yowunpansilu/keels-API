@@ -13,5 +13,5 @@ module.exports = {
   DEFAULT_ITEMS_PER_PAGE: 60,
   MAX_PAGES_PER_CATEGORY: 20,
   RATE_LIMIT_WINDOW: 15 * 60 * 1000, // 15 mins
-  RATE_LIMIT_MAX: 100 // max 100 requests per 15 mins
+  RATE_LIMIT_MAX: 200 // max 200 requests per 15 mins
 };
