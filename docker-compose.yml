@@ -4,12 +4,9 @@ services:
   api:
     build: .
     ports:
-      - "3000:3000"
-    environment:
-      - MONGODB_URI=mongodb://mongo:27017/keells-price-tracker
-      - PORT=3000
-    depends_on:
-      - mongo
+      - "7860:7860"
+    env_file:
+      - .env
 
   mongo:
     image: mongo:latest
