@@ -17,11 +17,15 @@ const {
 
 async function scrapeAll() {
   let browser;
+  const stats = { total: 0, new: 0, updated: 0, priceChanged: 0, errors: 0 };
+  
   try {
     if (!mongoose.connection.readyState) {
+      const maskedUri = process.env.MONGODB_URI?.replace(/:([^@]+)@/, ':****@');
+      console.log(`Connecting to MongoDB: ${maskedUri}`);
       await mongoose.connect(process.env.MONGODB_URI);
     }
-    console.log('Connected to MongoDB');
+    console.log(`Connected to Database: ${mongoose.connection.db.databaseName}`);
 
     browser = await puppeteer.launch({
       headless: "new",
@@ -73,23 +77,29 @@ async function scrapeAll() {
       while (hasMore && pageNo <= MAX_PAGES_PER_CATEGORY) {
         const apiUrl = `${API_BASE}/2.0/WebV2/GetItemDetails?pageNo=${pageNo}&itemsPerPage=${DEFAULT_ITEMS_PER_PAGE}&outletCode=${OUTLET_CODE}&departmentId=${cat.id}&itemPricefrom=0&itemPriceTo=200000&isFeatured=0&isPromotionOnly=false&sortBy=default&isShowOutofStockItems=true`;
         
-        console.log(`    API Page ${pageNo}...`);
+        console.log(`    [Page ${pageNo}] Fetching API data...`);
         try {
             await page.goto(apiUrl, { waitUntil: 'networkidle2', timeout: 30000 });
             const content = await page.evaluate(() => document.body.innerText);
             
             const data = JSON.parse(content);
             if (data.statusCode !== 200) {
-                console.log(`    API returned status ${data.statusCode}. End of category.`);
+                console.log(`    [Page ${pageNo}] API returned status ${data.statusCode}. End of category.`);
                 break;
             }
 
             const items = data.result?.itemDetailResult?.itemDetails || [];
-            console.log(`    Processing ${items.length} items.`);
+            console.log(`    [Page ${pageNo}] Processing ${items.length} items...`);
             for (const item of items) {
                 item.departmentId = cat.id; 
-                item.departmentName = cat.name; // Use the provided category name
-                await upsertProduct(item);
+                item.departmentName = cat.name; 
+                const result = await upsertProduct(item);
+                
+                stats.total++;
+                if (result === 'new') stats.new++;
+                else if (result === 'updated') stats.updated++;
+                else if (result === 'price_changed') { stats.updated++; stats.priceChanged++; }
+                else if (result === 'error') stats.errors++;
             }
             
             if (items.length === 0 || pageNo >= data.result.itemDetailResult.pageCount) {
@@ -99,15 +109,25 @@ async function scrapeAll() {
                 await new Promise(r => setTimeout(r, 1500));
             }
         } catch (err) {
-            console.error(`    Error on page ${pageNo}: ${err.message}`);
+            console.error(`    [Page ${pageNo}] Error: ${err.message}`);
+            stats.errors++;
             break;
         }
       }
     }
 
-    console.log('\nGlobal Scrape finished successfully.');
+    console.log('\n=====================================');
+    console.log('      SCRAPE SUMMARY');
+    console.log('=====================================');
+    console.log(`Total Scanned:   ${stats.total}`);
+    console.log(`New Added:       ${stats.new}`);
+    console.log(`Price Changes:   ${stats.priceChanged}`);
+    console.log(`Total Updated:   ${stats.updated}`);
+    console.log(`Errors:          ${stats.errors}`);
+    console.log('=====================================\n');
+
   } catch (error) {
-    console.error('Global Scrape failed:', error.message);
+    console.error('Global Scrape failed:', error.stack);
   } finally {
     if (browser) await browser.close();
   }
@@ -115,40 +135,55 @@ async function scrapeAll() {
 
 async function upsertProduct(item) {
   const sku = item.itemCode;
-  if (!sku) return;
+  if (!sku) {
+    console.warn(`    [!] Missing SKU for item: ${item.name || 'Unknown'}`);
+    return 'error';
+  }
 
-  const currentPrice = item.amount;
-  const existingProduct = await Product.findOne({ sku });
+  try {
+    const currentPrice = item.amount;
+    const existingProduct = await Product.findOne({ sku });
 
-  if (existingProduct) {
-    if (existingProduct.currentPrice !== currentPrice) {
+    if (existingProduct) {
+      let status = 'updated';
+      if (existingProduct.currentPrice !== currentPrice) {
+        console.log(`    [Price Change] ${sku}: ${existingProduct.currentPrice} -> ${currentPrice} (${item.name})`);
+        await new PriceHistory({ sku, price: currentPrice, date: new Date() }).save();
+        status = 'price_changed';
+      }
+
+      Object.assign(existingProduct, {
+        itemID: item.itemID, 
+        name: item.name, 
+        currentPrice, 
+        imageUrl: item.imageUrl,
+        isAvailable: item.isAvailable, 
+        departmentId: item.departmentId,
+        departmentName: item.departmentName,
+        lastUpdated: new Date()
+      });
+      await existingProduct.save();
+      return status;
+    } else {
+      console.log(`    [New Product] ${sku}: ${item.name} @ ${currentPrice}`);
+      const newProduct = new Product({
+        sku, 
+        itemID: item.itemID, 
+        name: item.name, 
+        currentPrice, 
+        imageUrl: item.imageUrl,
+        uom: item.uom, 
+        isAvailable: item.isAvailable,
+        departmentId: item.departmentId,
+        departmentName: item.departmentName
+      });
+      await newProduct.save();
       await new PriceHistory({ sku, price: currentPrice, date: new Date() }).save();
+      return 'new';
     }
-    Object.assign(existingProduct, {
-      itemID: item.itemID, 
-      name: item.name, 
-      currentPrice, 
-      imageUrl: item.imageUrl,
-      isAvailable: item.isAvailable, 
-      departmentId: item.departmentId,
-      departmentName: item.departmentName,
-      lastUpdated: new Date()
-    });
-    await existingProduct.save();
-  } else {
-    const newProduct = new Product({
-      sku, 
-      itemID: item.itemID, 
-      name: item.name, 
-      currentPrice, 
-      imageUrl: item.imageUrl,
-      uom: item.uom, 
-      isAvailable: item.isAvailable,
-      departmentId: item.departmentId,
-      departmentName: item.departmentName
-    });
-    await newProduct.save();
-    await new PriceHistory({ sku, price: currentPrice, date: new Date() }).save();
+  } catch (err) {
+    console.error(`    [Error Saving] ${sku}: ${err.message}`);
+    return 'error';
   }
 }
 
