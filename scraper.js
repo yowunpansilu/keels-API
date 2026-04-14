@@ -19,15 +19,36 @@ const {
 async function safeNavigate(page, url, retries = 3) {
     for (let i = 0; i < retries; i++) {
         try {
-            // Use domcontentloaded for faster JSON API response handling
-            // Increase timeout on each retry (30s, 45s, 60s)
             const timeout = 30000 + (i * 15000); 
             await page.goto(url, { waitUntil: 'domcontentloaded', timeout });
             return true;
         } catch (err) {
             if (i === retries - 1) throw err;
-            console.warn(`    [Retry ${i + 1}/${retries}] Failed to navigate: ${err.message}. Retrying...`);
-            await new Promise(r => setTimeout(r, 3000 * (i + 1))); // Incremental backoff
+            console.warn(`    [Retry ${i + 1}/${retries}] Page Navigation failed: ${err.message}. Retrying...`);
+            await new Promise(r => setTimeout(r, 3000 * (i + 1))); 
+        }
+    }
+}
+
+async function fetchApiData(page, url, retries = 3) {
+    for (let i = 0; i < retries; i++) {
+        try {
+            const timeout = 30000 + (i * 15000); 
+            return await page.evaluate(async (fetchUrl, fetchTimeout) => {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), fetchTimeout);
+                try {
+                    const response = await fetch(fetchUrl, { signal: controller.signal });
+                    if (!response.ok) throw new Error(`Status ${response.status}`);
+                    return await response.json();
+                } finally {
+                    clearTimeout(timer);
+                }
+            }, url, timeout);
+        } catch (err) {
+            if (i === retries - 1) throw err;
+            console.warn(`    [Retry ${i + 1}/${retries}] API Fetch failed: ${err.message}. Retrying...`);
+            await new Promise(r => setTimeout(r, 3000 * (i + 1)));
         }
     }
 }
@@ -100,10 +121,8 @@ async function scrapeAll() {
         
         console.log(`    [Page ${pageNo}] Fetching API data...`);
         try {
-            await safeNavigate(page, apiUrl);
-            const content = await page.evaluate(() => document.body.innerText);
+            const data = await fetchApiData(page, apiUrl);
             
-            const data = JSON.parse(content);
             if (data.statusCode !== 200) {
                 console.log(`    [Page ${pageNo}] API returned status ${data.statusCode}. End of category.`);
                 break;
