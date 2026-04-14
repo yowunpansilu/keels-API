@@ -7,35 +7,35 @@ const PriceHistory = require('./models/PriceHistory');
 
 puppeteer.use(StealthPlugin());
 
-const { 
-  CATEGORIES, 
-  OUTLET_CODE, 
-  BASE_URL, 
-  API_BASE, 
-  DEFAULT_ITEMS_PER_PAGE, 
-  MAX_PAGES_PER_CATEGORY 
+const {
+  CATEGORIES,
+  OUTLET_CODE,
+  BASE_URL,
+  API_BASE,
+  DEFAULT_ITEMS_PER_PAGE,
+  MAX_PAGES_PER_CATEGORY
 } = require('./config/constants');
 
 async function safeNavigate(page, url, retries = 3) {
-    for (let i = 0; i < retries; i++) {
-        try {
-            // Use domcontentloaded for faster JSON API response handling
-            // Increase timeout on each retry (30s, 45s, 60s)
-            const timeout = 30000 + (i * 15000); 
-            await page.goto(url, { waitUntil: 'domcontentloaded', timeout });
-            return true;
-        } catch (err) {
-            if (i === retries - 1) throw err;
-            console.warn(`    [Retry ${i + 1}/${retries}] Failed to navigate: ${err.message}. Retrying...`);
-            await new Promise(r => setTimeout(r, 3000 * (i + 1))); // Incremental backoff
-        }
+  for (let i = 0; i < retries; i++) {
+    try {
+      // Use domcontentloaded for faster JSON API response handling
+      // Increase timeout on each retry (30s, 45s and 60s)
+      const timeout = 30000 + (i * 15000);
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout });
+      return true;
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      console.warn(`    [Retry ${i + 1}/${retries}] Failed to navigate: ${err.message}. Retrying...`);
+      await new Promise(r => setTimeout(r, 3000 * (i + 1))); // Incremental backoff
     }
+  }
 }
 
 async function scrapeAll() {
   let browser;
   const stats = { total: 0, new: 0, updated: 0, priceChanged: 0, errors: 0 };
-  
+
   try {
     if (!mongoose.connection.readyState) {
       const uri = process.env.MONGODB_URI;
@@ -61,78 +61,78 @@ async function scrapeAll() {
     let capturedSessionId = null;
 
     page.on('request', request => {
-        const headers = request.headers();
-        if (headers['usersessionid'] && !capturedSessionId) {
-            capturedSessionId = headers['usersessionid'];
-            console.log(`Captured Session ID: ${capturedSessionId}`);
-        }
+      const headers = request.headers();
+      if (headers['usersessionid'] && !capturedSessionId) {
+        capturedSessionId = headers['usersessionid'];
+        console.log(`Captured Session ID: ${capturedSessionId}`);
+      }
     });
 
     console.log('Establishing session...');
     await safeNavigate(page, BASE_URL);
-    
+
     // Visit a category to trigger the session header
     console.log('Triggering session via Vegetables category...');
     await safeNavigate(page, CATEGORIES[0].url);
     await new Promise(r => setTimeout(r, 5000));
 
     if (!capturedSessionId) {
-        console.log('Session ID not captured from headers. Checking cookies...');
-        const cookies = await page.cookies();
-        const sCookie = cookies.find(c => c.name.includes('usersessionid'));
-        if (sCookie) capturedSessionId = sCookie.value;
+      console.log('Session ID not captured from headers. Checking cookies...');
+      const cookies = await page.cookies();
+      const sCookie = cookies.find(c => c.name.includes('usersessionid'));
+      if (sCookie) capturedSessionId = sCookie.value;
     }
 
     if (capturedSessionId) {
-        console.log(`Authenticated with Session ID: ${capturedSessionId}`);
-        await page.setExtraHTTPHeaders({ 'usersessionid': capturedSessionId });
+      console.log(`Authenticated with Session ID: ${capturedSessionId}`);
+      await page.setExtraHTTPHeaders({ 'usersessionid': capturedSessionId });
     } else {
-        console.warn('WARNING: No Session ID captured. Attempting scrape without authentication headers.');
+      console.warn('WARNING: No Session ID captured. Attempting scrape without authentication headers.');
     }
 
     for (const cat of CATEGORIES) {
       console.log(`\n--- Scraping ${cat.name} (ID: ${cat.id}) ---`);
-      
+
       let pageNo = 1;
       let hasMore = true;
       while (hasMore && pageNo <= MAX_PAGES_PER_CATEGORY) {
         const apiUrl = `${API_BASE}/2.0/WebV2/GetItemDetails?pageNo=${pageNo}&itemsPerPage=${DEFAULT_ITEMS_PER_PAGE}&outletCode=${OUTLET_CODE}&departmentId=${cat.id}&itemPricefrom=0&itemPriceTo=200000&isFeatured=0&isPromotionOnly=false&sortBy=default&isShowOutofStockItems=true`;
-        
+
         console.log(`    [Page ${pageNo}] Fetching API data...`);
         try {
-            await safeNavigate(page, apiUrl);
-            const content = await page.evaluate(() => document.body.innerText);
-            
-            const data = JSON.parse(content);
-            if (data.statusCode !== 200) {
-                console.log(`    [Page ${pageNo}] API returned status ${data.statusCode}. End of category.`);
-                break;
-            }
+          await safeNavigate(page, apiUrl);
+          const content = await page.evaluate(() => document.body.innerText);
 
-            const items = data.result?.itemDetailResult?.itemDetails || [];
-            console.log(`    [Page ${pageNo}] Processing ${items.length} items...`);
-            for (const item of items) {
-                item.departmentId = cat.id; 
-                item.departmentName = cat.name; 
-                const result = await upsertProduct(item);
-                
-                stats.total++;
-                if (result === 'new') stats.new++;
-                else if (result === 'updated') stats.updated++;
-                else if (result === 'price_changed') { stats.updated++; stats.priceChanged++; }
-                else if (result === 'error') stats.errors++;
-            }
-            
-            if (items.length === 0 || pageNo >= data.result.itemDetailResult.pageCount) {
-                hasMore = false;
-            } else {
-                pageNo++;
-                await new Promise(r => setTimeout(r, 1500));
-            }
-        } catch (err) {
-            console.error(`    [Page ${pageNo}] Error: ${err.message}`);
-            stats.errors++;
+          const data = JSON.parse(content);
+          if (data.statusCode !== 200) {
+            console.log(`    [Page ${pageNo}] API returned status ${data.statusCode}. End of category.`);
             break;
+          }
+
+          const items = data.result?.itemDetailResult?.itemDetails || [];
+          console.log(`    [Page ${pageNo}] Processing ${items.length} items...`);
+          for (const item of items) {
+            item.departmentId = cat.id;
+            item.departmentName = cat.name;
+            const result = await upsertProduct(item);
+
+            stats.total++;
+            if (result === 'new') stats.new++;
+            else if (result === 'updated') stats.updated++;
+            else if (result === 'price_changed') { stats.updated++; stats.priceChanged++; }
+            else if (result === 'error') stats.errors++;
+          }
+
+          if (items.length === 0 || pageNo >= data.result.itemDetailResult.pageCount) {
+            hasMore = false;
+          } else {
+            pageNo++;
+            await new Promise(r => setTimeout(r, 1500));
+          }
+        } catch (err) {
+          console.error(`    [Page ${pageNo}] Error: ${err.message}`);
+          stats.errors++;
+          break;
         }
       }
     }
@@ -174,11 +174,11 @@ async function upsertProduct(item) {
       }
 
       Object.assign(existingProduct, {
-        itemID: item.itemID, 
-        name: item.name, 
-        currentPrice, 
+        itemID: item.itemID,
+        name: item.name,
+        currentPrice,
         imageUrl: item.imageUrl,
-        isAvailable: item.isAvailable, 
+        isAvailable: item.isAvailable,
         departmentId: item.departmentId,
         departmentName: item.departmentName,
         lastUpdated: new Date()
@@ -188,12 +188,12 @@ async function upsertProduct(item) {
     } else {
       console.log(`    [New Product] ${sku}: ${item.name} @ ${currentPrice}`);
       const newProduct = new Product({
-        sku, 
-        itemID: item.itemID, 
-        name: item.name, 
-        currentPrice, 
+        sku,
+        itemID: item.itemID,
+        name: item.name,
+        currentPrice,
         imageUrl: item.imageUrl,
-        uom: item.uom, 
+        uom: item.uom,
         isAvailable: item.isAvailable,
         departmentId: item.departmentId,
         departmentName: item.departmentName
