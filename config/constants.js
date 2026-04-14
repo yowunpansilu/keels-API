@@ -10,8 +10,8 @@ module.exports = {
   OUTLET_CODE: 'SCBI',
   BASE_URL: 'https://www.keellssuper.com',
   API_BASE: 'https://zebraliveback.keellssuper.com',
-  DEFAULT_ITEMS_PER_PAGE: 60,
-  MAX_PAGES_PER_CATEGORY: 20,
+  DEFAULT_ITEMS_PER_PAGE: 24,
+  MAX_PAGES_PER_CATEGORY: 50,
   RATE_LIMIT_WINDOW: 15 * 60 * 1000, // 15 mins
   RATE_LIMIT_MAX: 200 // max 200 requests per 15 mins
 };

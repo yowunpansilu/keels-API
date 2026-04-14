@@ -19,15 +19,14 @@ const {
 async function safeNavigate(page, url, retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
-      // Use domcontentloaded for faster JSON API response handling
-      // Increase timeout on each retry (30s, 45s and 60s)
-      const timeout = 30000 + (i * 15000);
+      // Increase timeout on each retry (45s, 60s, 90s)
+      const timeout = 45000 + (i * 15000);
       await page.goto(url, { waitUntil: 'domcontentloaded', timeout });
       return true;
     } catch (err) {
       if (i === retries - 1) throw err;
-      console.warn(`    [Retry ${i + 1}/${retries}] Failed to navigate: ${err.message}. Retrying...`);
-      await new Promise(r => setTimeout(r, 3000 * (i + 1))); // Incremental backoff
+      console.warn(`    [Retry ${i + 1}/${retries}] Navigation failed: ${err.message}. Retrying...`);
+      await new Promise(r => setTimeout(r, 5000 * (i + 1))); // Incremental backoff
     }
   }
 }
@@ -127,7 +126,8 @@ async function scrapeAll() {
             hasMore = false;
           } else {
             pageNo++;
-            await new Promise(r => setTimeout(r, 1500));
+            // Longer delay between pages to respect rate limits
+            await new Promise(r => setTimeout(r, 3000));
           }
         } catch (err) {
           console.error(`    [Page ${pageNo}] Error: ${err.message}`);
