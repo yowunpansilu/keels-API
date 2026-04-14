@@ -16,6 +16,22 @@ const {
   MAX_PAGES_PER_CATEGORY 
 } = require('./config/constants');
 
+async function safeNavigate(page, url, retries = 3) {
+    for (let i = 0; i < retries; i++) {
+        try {
+            // Use domcontentloaded for faster JSON API response handling
+            // Increase timeout on each retry (30s, 45s, 60s)
+            const timeout = 30000 + (i * 15000); 
+            await page.goto(url, { waitUntil: 'domcontentloaded', timeout });
+            return true;
+        } catch (err) {
+            if (i === retries - 1) throw err;
+            console.warn(`    [Retry ${i + 1}/${retries}] Failed to navigate: ${err.message}. Retrying...`);
+            await new Promise(r => setTimeout(r, 3000 * (i + 1))); // Incremental backoff
+        }
+    }
+}
+
 async function scrapeAll() {
   let browser;
   const stats = { total: 0, new: 0, updated: 0, priceChanged: 0, errors: 0 };
@@ -53,11 +69,11 @@ async function scrapeAll() {
     });
 
     console.log('Establishing session...');
-    await page.goto(BASE_URL, { waitUntil: 'networkidle2', timeout: 60000 });
+    await safeNavigate(page, BASE_URL);
     
     // Visit a category to trigger the session header
     console.log('Triggering session via Vegetables category...');
-    await page.goto(CATEGORIES[0].url, { waitUntil: 'networkidle2', timeout: 30000 });
+    await safeNavigate(page, CATEGORIES[0].url);
     await new Promise(r => setTimeout(r, 5000));
 
     if (!capturedSessionId) {
@@ -84,7 +100,7 @@ async function scrapeAll() {
         
         console.log(`    [Page ${pageNo}] Fetching API data...`);
         try {
-            await page.goto(apiUrl, { waitUntil: 'networkidle2', timeout: 30000 });
+            await safeNavigate(page, apiUrl);
             const content = await page.evaluate(() => document.body.innerText);
             
             const data = JSON.parse(content);
