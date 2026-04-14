@@ -1,3 +1,4 @@
+require('dotenv').config();
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const mongoose = require('mongoose');
@@ -21,9 +22,13 @@ async function scrapeAll() {
   
   try {
     if (!mongoose.connection.readyState) {
-      const maskedUri = process.env.MONGODB_URI?.replace(/:([^@]+)@/, ':****@');
+      const uri = process.env.MONGODB_URI;
+      if (!uri) {
+        throw new Error('MONGODB_URI is not defined in environment variables');
+      }
+      const maskedUri = uri.replace(/:([^@]+)@/, ':****@');
       console.log(`Connecting to MongoDB: ${maskedUri}`);
-      await mongoose.connect(process.env.MONGODB_URI);
+      await mongoose.connect(uri);
     }
     console.log(`Connected to Database: ${mongoose.connection.db.databaseName}`);
 
